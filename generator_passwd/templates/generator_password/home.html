@@ -1,0 +1,42 @@
+{% extends "generator_password/base.html" %}
+
+{% block content %}
+<div class="form-group py-4">
+    <form action="{% url 'password' %}">
+        <div class="mb-3">
+            <label for="length" class="form-label">Length password</label>
+            <select name="length" class="form-select">
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="16">16</option>
+                <option value="21">21</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <input class="btn btn-outline-warning btn-lg" type="submit" value="Generate">
+        </div>
+    </form>
+</div>
+
+{% if password %}
+    <div class="input-group mb-3">
+        <button onclick="copy()" class="btn btn-outline-secondary" type="button" id="button-addon1">copy</button>
+        <input type="text" class="form-control" value="{{ password }}" id="password" aria-label="Example text with button addon" aria-describedby="button-addon1">
+    </div>
+{% endif %}
+
+<script>
+    function copy() {
+        let copyText = document.getElementById("password");
+
+        copyText.select();
+
+        document.execCommand("copy");
+
+        alert("Password copied!")
+    }   
+</script>
+
+{% endblock content %}
